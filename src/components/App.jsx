@@ -39,11 +39,13 @@ export default function App() {
     }
   };
 
+  const gifMessage = gifSearch.image_url ? ( <Giphy gifSearch={gifSearch} />) : (<h2>Random</h2>)
+
   return (
     <div className="App">
       <h1 style={{color: "blue"}}>Dennelle's Giphy Page</h1>
       <SearchBar handleSubmit={handleSubmit} />
-      {gifSearch.image_url ? ( <Giphy gifSearch={gifSearch} />) : (<h2>Random</h2>)}
+      {gifMessage}
     </div>
   );
 }
