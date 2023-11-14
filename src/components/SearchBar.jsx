@@ -11,7 +11,7 @@ export default function SearchBar(props){
 
     return(
         <form onSubmit={handleSubmit}>
-            <input ref={inputRef} placeholder="type word" style={{color: 'green', lineHeight: 1}} />
+            <input ref={inputRef} placeholder="search here" style={{color: 'green', lineHeight: 1}} />
             <button style={{color: "red", backgroundColor: "white", width:70}}>Submit</button>
         </form>
     )

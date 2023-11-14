@@ -11,17 +11,24 @@ export default function App() {
   const key = '4zczkjsWs8I2SzNTBNYMhqP0QY76uei1';
 
   const requestApi = async () => {
+    //getting the API
     const endpoint = `https://api.giphy.com/v1/gifs/random?api_key=${key}`;
     try {
       setLoading(true)
       const res = await fetch(endpoint);
+      //confirms that gif was fetched.
+      console.log("Response for Endpoint",res);
+      //receiving the data from json and console.log to determine the shape of the data.
       const json = await res.json();
-      console.log('makeApiCall', json.data);
-      setGifSearch({ image_url: json.data.images.downsized_large.url });
+      console.log("JSON",json);
+      //the data is an object with two keys data and meta. Using data I obtained the image I need and the url.
+      setGifSearch({ image_url: json.data.images.downsized.url });
     } catch (err) {
       console.log('err', err);
     }
   };
+  //this the state after it was updated and I use this object:string in the giphy component to render it on the page.
+  console.log('GIF SEARCH', gifSearch)
 
   useEffect(() => {
     requestApi();
@@ -32,8 +39,9 @@ export default function App() {
       const gifSearch = `https://api.giphy.com/v1/gifs/search?api_key=${key}&q=${value}&limit=1`;
       const res = await fetch(gifSearch);
       const json = await res.json();
-      console.log('handleSumbit', json.data[0].images.downsized_large.url );
-      setGifSearch({ image_url: json.data[0].images.downsized_large.url });
+      console.log('handleSumbit', json.data[0].images.downsized_still );
+      //image_url is a from the gifSearch state. see Giphy component
+      setGifSearch({ image_url: json.data[0].images.downsized_still });
     } else {
       makeApiCall()
     }
